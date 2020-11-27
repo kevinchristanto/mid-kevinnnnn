@@ -14,8 +14,8 @@ int main()
         scanf("%d %s %d - %[^\n]", &people->a.day, people->a.month, &people->a.year, people->a.name);
         people = people->next;
     }
-    Node *a = createNode(people);
-    insert(a);
+    //Node *a = createNode(people);
+    //insert(a);
     curr = head;
     while (curr)
     {
