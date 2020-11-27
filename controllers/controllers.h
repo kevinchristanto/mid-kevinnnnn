@@ -3,31 +3,31 @@
 #include <stdio.h>
 #include "../models/models.h"
 
-Node *createNode(patient *a)
+Node *createNode(int day, char *month, int year, char *name)
 {
     Node *temp = (Node *)malloc(sizeof(Node));
-    strcpy(temp->a.name, a->name);
-    temp->a.day = a->day;
-    strcpy(temp->a.month, a->month);
-    temp->a.year = a->year;
+    strcpy(temp->a.name, name);
+    temp->a.day = day;
+    strcpy(temp->a.month, month);
+    temp->a.year = year;
     temp->prev = temp->next = NULL;
     return temp;
 }
 
-void insert(patient *a)
+void insert(int day, char *month, int year, char *name)
 {
-    Node *temp = createNode(a);
+    Node *temp = createNode(day, month, year, name);
     if (!head)
     {
         head = tail = temp;
     }
-    else if (a->day > tail->a.day)
+    else if (year > head->a.year)
     {
         temp->next = head;
         head->prev = temp;
         head = temp;
     }
-    else if (a->day < tail->a.day)
+    else if (year < tail->a.year)
     {
         temp->prev = tail;
         tail->next = temp;
@@ -35,15 +35,18 @@ void insert(patient *a)
     }
     else
     {
-        Node *curr = createNode(a);
-        while (curr && curr->next->a.day < temp->a.day)
+        Node *curr = createNode(day, month, year, name);
+        while (curr)
         {
-            curr = curr->next;
+            if (curr->a.year == year)
+            {
+                curr = curr->next;
+            }
+            curr->next->prev = temp;
+            temp->next = curr->next;
+            curr->next = temp;
+            temp->prev = curr;
         }
-        curr->next->prev = temp;
-        temp->next = curr->next;
-        curr->next = temp;
-        temp->prev = curr;
     }
 }
 
