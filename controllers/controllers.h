@@ -3,31 +3,31 @@
 #include <stdio.h>
 #include "../models/models.h"
 
-Node *createNode(int day, char *month, int year, char *name)
+Node *createNode(patient *a)
 {
     Node *temp = (Node *)malloc(sizeof(Node));
-    strcpy(temp->a.name, name);
-    temp->a.day = day;
-    strcpy(temp->a.month, month);
-    temp->a.year = year;
+    strcpy(temp->a.name, a->name);
+    temp->a.day = a->day;
+    strcpy(temp->a.month, a->month);
+    temp->a.year = a->year;
     temp->prev = temp->next = NULL;
     return temp;
 }
 
-void insert(int day, char *month, int year, char *name)
+void insert(patient *a)
 {
-    Node *temp = createNode(day, month, year, name);
+    Node *temp = createNode(a);
     if (!head)
     {
         head = tail = temp;
     }
-    else if (year > head->a.year)
+    else if (a->year > head->a.year)
     {
         temp->next = head;
         head->prev = temp;
         head = temp;
     }
-    else if (year < tail->a.year)
+    else if (a->year < tail->a.year)
     {
         temp->prev = tail;
         tail->next = temp;
@@ -35,10 +35,10 @@ void insert(int day, char *month, int year, char *name)
     }
     else
     {
-        Node *curr = createNode(day, month, year, name);
+        Node *curr = createNode(a);
         while (curr)
         {
-            if (curr->a.year == year)
+            if (curr->a.year == a->year)
             {
                 curr = curr->next;
             }

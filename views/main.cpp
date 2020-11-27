@@ -13,6 +13,7 @@ int main()
         scanf("%d %[^\n] %d - %[^\n]", &people->a.day, people->a.month, &people->a.year, people->a.name);
         people = people->next;
     }
+
     if ((total - cure) > 0)
     {
         printf("Need %d cure more\n", total - cure);
