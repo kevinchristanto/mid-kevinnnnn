@@ -9,7 +9,7 @@ struct Node
 {
     patient a;
     Node *next, *prev;
-} * head, *tail;
+} * head, *tail, *curr;
 
 const char january = 1;
 const char february = 2;
@@ -23,4 +23,3 @@ const char september = 9;
 const char october = 10;
 const char november = 11;
 const char december = 12;
-
